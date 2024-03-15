@@ -1,0 +1,15 @@
+{% extends "bookly_nest/base.html" %}
+{% load django_bootstrap5 %}
+{% block page_header %}
+    <h1>Log in to your account</h1>
+{% endblock page_header %}
+{% block content %}
+    {% if form.errors %}<p>Your username and password didn't match. Please try again.</p>{% endif %}
+    <form action="{% url "accounts:login" %}" method='post'>
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        {% bootstrap_button button_type="submit" content="Log in" %}
+        {% comment %} {{ form.as_div }}
+        <button name="submit">Login</button> {% endcomment %}
+    </form>
+{% endblock content %}

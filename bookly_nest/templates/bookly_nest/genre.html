@@ -1,0 +1,30 @@
+{% extends "bookly_nest/base.html" %}
+{% load django_bootstrap5 %}
+{% block page_header %}
+    <p>Genre: {{ genre }}</p>
+{% endblock page_header %}
+{% block content %}
+    <a href="{% url "bookly_nest:new_book" genre.id %}">Add a new book</a>
+    <ul>
+        {% for book in books %}
+            <div class="card mb-3">
+                <h6 class="card-header">
+                    Added:  {{ book.date_added|date:"M d, Y H:i" }}
+                    <small><a href="{% url 'bookly_nest:edit_book' book.id %}">Edit book</a></small>
+                </h6>
+                <p>Title: {{ book.title }}</p>
+                <p>Author: {{ book.author }}</p>
+                <div class="card-body">
+                    <p>Description:</p>
+                    {{ book.description }}
+                </div>
+                <small>
+                    <a class="text-danger"
+                       href="{% url 'bookly_nest:delete_book' book.id %}">Delete book</a>
+                </small>
+            </div>
+        {% empty %}
+            <p>No books found.</p>
+        {% endfor %}
+    </ul>
+{% endblock content %}

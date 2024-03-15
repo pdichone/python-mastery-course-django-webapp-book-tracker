@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>BooklyNest</title>
+        {% load django_bootstrap5 %}
+        {% bootstrap_css %}
+        {% bootstrap_javascript %}
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-md navbar-light bg-light mb-4 border">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="{% url "bookly_nest:index" %}">BooklyNest</a>
+                <button class="navbar-toggler"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#navbarNav"
+                        aria-controls="navbarCollapse"
+                        aria-expanded="false"
+                        aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                        <li class="nav-item">
+                            <a class="nav-link"  href="{% url "bookly_nest:genres" %}">Genres</a>
+                        </li>
+                    </ul>
+                    <!-- Right Side Of Navbar -->
+                    <ul class="navbar-nav ms-auto mb-2 mb-md-0">
+                        <!-- Authentication Links -->
+                        {% if user.is_authenticated %}
+                            <li class="nav-item">
+                                <span class="nav-text me-2">Welcome, {{ user.username }}</span>
+                            </li>
+                        {% else %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url "accounts:register" %}">Register</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url "accounts:login" %}">Login</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                    <!-- End of account related links -->
+                    {% if user.is_authenticated %}
+                        <form action="{% url 'accounts:logout' %}" method='post'>
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-outline-secondary btn-sm">Logout</button>
+                        </form>
+                    {% endif %}
+                </div>
+            </div>
+        </nav>
+        <!-- End of Navbar -->
+        <main class="container">
+            <div class="pb-2 mb-2 border-bottom">
+                {% block page_header %}
+                {% endblock page_header %}
+            </div>
+            <div>
+                {% block content %}
+                {% endblock content %}
+            </div>
+        </main>
+    </body>
+</html>
+{% comment %} <a href="{% url "bookly_nest:index" %}">BooklyNest</a> -
+<a href="{% url "bookly_nest:genres" %}">Genre</a>
+{% if user.is_authenticated %}
+    <p>Welcome, {{ user.username }}.</p>
+{% else %}
+    <a href="{% url "accounts:login" %}">Login</a> -
+    <a class="nav-link" href="{% url "accounts:register" %}">Register</a>
+{% endif %}
+{% block content %}
+{% endblock content %}
+{% if user.is_authenticated %}
+    <hr />
+    <form action="{% url "accounts:logout" %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Logout</button>
+    </form>
+{% endif %} {% endcomment %}

@@ -1,0 +1,14 @@
+{% extends "bookly_nest/base.html" %}
+{% load django_bootstrap5 %}
+{% block page_header %}
+    <h2>Add new genre</h2>
+{% endblock page_header %}
+{% block content %}
+    <form {% url "bookly_nest:new_genre" %} method="post">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        {% bootstrap_button button_type="submit" content="Add genre" %}
+        {% comment %} {{ form.as_div }}
+        <button type="submit">Add genre</button> {% endcomment %}
+    </form>
+{% endblock content %}

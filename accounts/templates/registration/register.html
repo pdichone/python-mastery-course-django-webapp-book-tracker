@@ -1,0 +1,14 @@
+{% extends "bookly_nest/base.html" %}
+{% load django_bootstrap5 %}
+{% block page_header %}
+    <h1>Register</h1>
+{% endblock page_header %}
+{% block content %}
+    <form action="{% url 'accounts:register' %}" method="post">
+        {% csrf_token %}
+        {{ form.as_div }}
+        <button name="submit">Register</button>
+        {% comment %} {% bootstrap_form form %}
+        {% bootstrap_button button_type="submit" content="Register" %} {% endcomment %}
+    </form>
+{% endblock content %}

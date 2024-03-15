@@ -1,0 +1,14 @@
+{% extends "bookly_nest/base.html" %}
+{% load django_bootstrap5 %}
+{% block page_header %}
+    <h2>Delete Book</h2>
+{% endblock page_header %}
+{% block content %}
+    <form method="post">
+        {{ form.as_div }}
+        <p>Are you sure you want to delete: "{{ book.title }} "?</p>
+        {% csrf_token %}
+        {% bootstrap_button button_type="submit" content="Yes Delete" %}
+        <a class="p-2 g-col-6" href="{% url 'bookly_nest:genre' genre.id %}">Cancel</a>
+    </form>
+{% endblock content %}

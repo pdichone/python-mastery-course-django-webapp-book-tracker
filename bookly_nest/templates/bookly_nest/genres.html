@@ -1,0 +1,20 @@
+{% extends "bookly_nest/base.html" %}
+{% load django_bootstrap5 %}
+{% block page_header %}
+    <h1>Genres</h1>
+{% endblock page_header %}
+{% block content %}
+    <ul class="list-group list-inline">
+        {% for genre in genres %}
+            <li>
+                <a class="list-group-item list-group-item-active"
+                   href="{% url "bookly_nest:genre" genre.id %}">{{ genre.name }}</a>
+            </li>
+        {% empty %}
+            <p>No genres have been added.</p>
+        {% endfor %}
+    </ul>
+    <div class="mt-4">
+        <a href="{% url "bookly_nest:new_genre" %}">Add a new genre</a>
+    </div>
+{% endblock content %}

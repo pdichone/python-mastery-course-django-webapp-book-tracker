@@ -1,0 +1,15 @@
+{% extends "bookly_nest/base.html" %}
+{% block content %}
+    <div class="container">
+        <div class="col-md-12">
+            <h1 class="display-2">Bookly Nest</h1>
+            <p class="lead">
+                Welcome to Bookly Nest, a place to manage your book library.
+                Whenever you find a book, you can add it to your library and keep track of it.
+                You can also add a review/notes to the book.
+            </p>
+        </div>
+        <a class="btn btn-primary btn-lg mt-1 bg-primary"
+           href="{% url "accounts:register" %}">Register &raquo;</a>
+    </div>
+{% endblock content %}
